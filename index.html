@@ -3,278 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SolarTek MA | منصة الطاقة الذكية بالمغرب</title>
+    <title>BI-SOLAR | حاسبة الطاقة الشمسية الذكية بالمغرب</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Tajawal', sans-serif; scroll-behavior: smooth; }
-        .glass-nav { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid #eee; }
-        .partner-card:hover { border-color: #10b981; transform: translateY(-3px); }
-        input[type=number]::-webkit-inner-spin-button { display: none; }
+        body { font-family: 'Tajawal', sans-serif; background-color: #f0fdf4; scroll-behavior: smooth; }
+        .solar-gradient { background: linear-gradient(135deg, #166534 0%, #22c55e 100%); }
+        .partner-box { filter: grayscale(1); opacity: 0.5; transition: all 0.4s; border: 1px solid #dcfce7; }
+        .partner-box:hover { filter: grayscale(0); opacity: 1; border-color: #22c55e; background: white; }
+        input::-webkit-inner-spin-button { display: none; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 text-right">
+<body class="text-slate-900">
 
-    <nav class="sticky top-0 z-50 glass-nav px-6 py-4">
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-green-100 px-6 py-4">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-2 font-black text-2xl">
-                <span class="text-green-600 tracking-tighter">Solar<span class="text-slate-900">Tek</span> <span class="text-xs border border-green-600 px-1 rounded">MA</span></span>
+            <div class="text-2xl font-black tracking-tighter">
+                <span class="text-green-600">BI</span><span class="text-slate-900">-SOLAR</span>
             </div>
-            <button onclick="toggleLanguage()" id="langBtn" class="text-sm font-bold border-2 border-slate-900 px-4 py-1 rounded-full hover:bg-slate-900 hover:text-white transition">English</button>
+            <button onclick="document.getElementById('solar-form').scrollIntoView()" class="bg-green-600 text-white px-6 py-2 rounded-2xl text-sm font-black hover:bg-green-700 transition shadow-lg shadow-green-200">اطلب دراسة تقنية</button>
         </div>
     </nav>
 
-    <header class="max-w-6xl mx-auto px-6 py-12 text-center">
-        <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight" id="heroTitle">استثمر في شمس المغرب<br><span class="text-green-600">ووفر فواتيرك للأبد</span></h1>
-        <p class="text-slate-500 text-lg max-w-2xl mx-auto" id="heroSub">احسب أرباحك بالدرهم المغربي واحصل على استشارة تقنية مجانية من خبراء معتمدين.</p>
+    <header class="max-w-6xl mx-auto px-6 py-16 text-center">
+        <div class="inline-block px-4 py-1 bg-green-100 text-green-700 rounded-full text-[10px] font-black uppercase mb-4 tracking-widest">Green Tech Solution</div>
+        <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight text-slate-900">وفر في فاتورة <span class="text-green-600">الكهرباء</span><br>بذكاء واحترافية</h1>
+        <p class="text-slate-500 text-lg max-w-2xl mx-auto italic font-medium">حاسبة BI-SOLAR الدقيقة لتحليل استثمارك في الطاقة المتجددة فوق سطح منزلك أو مقاولتك.</p>
     </header>
 
-    <main class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 mb-20">
-        <div class="lg:col-span-4 bg-white p-8 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100">
-            <h2 class="text-xl font-bold mb-8 flex items-center gap-2 text-slate-700" id="inputTitle"><i data-lucide="calculator" class="text-green-600 text-slate-900"></i> معايير الحساب</h2>
-            <div class="space-y-6 text-right">
+    <main class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 mb-24">
+        
+        <div class="lg:col-span-5 bg-white p-10 rounded-[3rem] shadow-2xl shadow-green-900/5 border border-green-50">
+            <h2 class="text-xl font-black mb-8 flex items-center gap-2 text-slate-800"><i data-lucide="sun" class="text-green-500"></i> بيانات الاستهلاك</h2>
+            <div class="space-y-8">
                 <div>
-                    <label class="block text-xs font-black text-slate-400 mb-3 uppercase tracking-widest" id="billLabel">الفاتورة الشهرية (MAD)</label>
-                    <input type="number" id="monthlyBill" value="1200" oninput="calculate()" class="w-full p-4 bg-slate-50 border-2 border-transparent focus:border-green-500 rounded-2xl outline-none font-bold text-xl transition-all">
+                    <label class="block text-[10px] font-black text-slate-400 mb-3 uppercase tracking-widest">معدل الفاتورة الشهرية (MAD)</label>
+                    <input type="number" id="bill" value="600" oninput="calculateSolar()" class="w-full p-5 bg-green-50/50 border-2 border-transparent focus:border-green-500 rounded-2xl outline-none font-black text-2xl transition-all text-green-700">
                 </div>
                 <div>
-                    <label class="block text-xs font-black text-slate-400 mb-3 uppercase tracking-widest" id="costLabel">ميزانية النظام (MAD)</label>
-                    <input type="number" id="systemCost" value="45000" oninput="calculate()" class="w-full p-4 bg-slate-50 border-2 border-transparent focus:border-blue-500 rounded-2xl outline-none font-bold text-xl transition-all text-blue-600">
+                    <label class="block text-[10px] font-black text-slate-400 mb-3 uppercase tracking-widest">المساحة المتوفرة للسطح (m²)</label>
+                    <input type="number" id="area" value="30" oninput="calculateSolar()" class="w-full p-5 bg-green-50/50 border-2 border-transparent focus:border-green-500 rounded-2xl outline-none font-bold transition-all">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-black text-slate-400 mb-3 uppercase tracking-widest">نوع النظام</label>
+                    <select id="type" onchange="calculateSolar()" class="w-full p-5 bg-green-50/50 border-2 border-transparent focus:border-green-500 rounded-2xl outline-none font-bold transition-all appearance-none">
+                        <option value="on-grid">مرتبط بالشبكة (On-Grid)</option>
+                        <option value="hybrid">هجين مع بطاريات (Hybrid)</option>
+                    </select>
                 </div>
             </div>
         </div>
 
-        <div class="lg:col-span-8 space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-center font-black">
-                <div class="bg-green-600 p-8 rounded-[2.5rem] text-white shadow-xl shadow-green-200">
-                    <p id="annSavingLabel" class="text-green-100 text-xs font-bold mb-2 uppercase">التوفير السنوي المتوقع</p>
-                    <h3 id="annualSaving" class="text-4xl italic">0 MAD</h3>
+        <div class="lg:col-span-7 space-y-6">
+            <div class="solar-gradient p-12 rounded-[3.5rem] text-white shadow-2xl shadow-green-200 relative overflow-hidden group">
+                <div class="relative z-10">
+                    <p class="text-green-100 text-xs font-black mb-2 uppercase tracking-widest">التوفير السنوي المقدر</p>
+                    <h3 id="savings" class="text-6xl font-black italic">0 MAD</h3>
                 </div>
-                <div class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-xl shadow-slate-200/50">
-                    <p id="paybackLabel" class="text-slate-400 text-xs font-bold mb-2 uppercase">فترة استرداد الاستثمار</p>
-                    <h3 id="paybackText" class="text-4xl text-slate-900">0 Years</h3>
-                </div>
+                <i data-lucide="zap" class="w-48 h-48 absolute -left-10 -bottom-10 text-white opacity-10 group-hover:rotate-12 transition-transform duration-700"></i>
             </div>
-            <div class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-xl shadow-slate-200/50 h-[350px]">
-                <canvas id="mainChart"></canvas>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white p-8 rounded-[2.5rem] border border-green-50 shadow-sm">
+                    <p class="text-slate-400 text-[10px] font-black mb-2 uppercase tracking-widest">تكلفة التركيب التقريبية</p>
+                    <h4 id="cost" class="text-2xl font-black text-slate-800">0 MAD</h4>
+                </div>
+                <div class="bg-white p-8 rounded-[2.5rem] border border-green-50 shadow-sm">
+                    <p class="text-slate-400 text-[10px] font-black mb-2 uppercase tracking-widest">عدد الألواح المطلوبة</p>
+                    <h4 id="panels" class="text-2xl font-black text-slate-800">0 لوح</h4>
+                </div>
+                <div class="bg-white p-8 rounded-[2.5rem] border border-green-50 shadow-sm">
+                    <p class="text-slate-400 text-[10px] font-black mb-2 uppercase tracking-widest">فترة استرداد المال</p>
+                    <h4 id="payback" class="text-2xl font-black text-green-600 italic">0 سنوات</h4>
+                </div>
+                <div class="bg-white p-8 rounded-[2.5rem] border border-green-50 shadow-sm">
+                    <p class="text-slate-400 text-[10px] font-black mb-2 uppercase tracking-widest">خفض انبعاثات CO2</p>
+                    <h4 id="co2" class="text-2xl font-black text-slate-800">0 طن/سنة</h4>
+                </div>
             </div>
         </div>
     </main>
 
     <section class="max-w-6xl mx-auto px-6 mb-24">
-        <h2 class="text-2xl font-black mb-8 border-r-4 border-green-500 pr-4" id="partnersTitle">الشركاء والمزودون المعتمدون</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="partner-card bg-white p-6 rounded-3xl border border-slate-100 transition-all flex items-center gap-4">
-                <div class="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center text-green-600"><i data-lucide="award"></i></div>
-                <div><h4 class="font-bold">Atlas Solar</h4><p class="text-[10px] text-slate-400">Casablanca / Marrakesh</p></div>
-            </div>
-            <div class="partner-card bg-white p-6 rounded-3xl border border-slate-100 transition-all flex items-center gap-4">
-                <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600"><i data-lucide="zap"></i></div>
-                <div><h4 class="font-bold">Noor Energy</h4><p class="text-[10px] text-slate-400">Rabat / Tangier</p></div>
-            </div>
-            <div class="partner-card bg-white p-6 rounded-3xl border border-slate-100 transition-all flex items-center gap-4">
-                <div class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-600"><i data-lucide="sun"></i></div>
-                <div><h4 class="font-bold">EcoMarr</h4><p class="text-[10px] text-slate-400">Agadir / Souss</p></div>
-            </div>
-            <div class="border-2 border-dashed border-slate-200 rounded-3xl p-6 flex flex-col items-center justify-center text-center hover:bg-slate-50 transition cursor-pointer group">
-                <i data-lucide="plus" class="w-8 h-8 text-slate-200 group-hover:text-green-500 mb-2"></i>
-                <p class="text-slate-400 text-[10px] font-bold uppercase tracking-widest adText">مساحة إعلانية شاغرة</p>
-            </div>
-            <div class="border-2 border-dashed border-slate-200 rounded-3xl p-6 flex flex-col items-center justify-center text-center hover:bg-slate-50 transition cursor-pointer group">
-                <i data-lucide="plus" class="w-8 h-8 text-slate-200 group-hover:text-green-500 mb-2"></i>
-                <p class="text-slate-400 text-[10px] font-bold uppercase tracking-widest adText">مساحة إعلانية شاغرة</p>
-            </div>
-            <div class="border-2 border-dashed border-slate-200 rounded-3xl p-6 flex flex-col items-center justify-center text-center hover:bg-slate-50 transition cursor-pointer group">
-                <i data-lucide="plus" class="w-8 h-8 text-slate-200 group-hover:text-green-500 mb-2"></i>
-                <p class="text-slate-400 text-[10px] font-bold uppercase tracking-widest adText">مساحة إعلانية شاغرة</p>
-            </div>
+        <h2 class="text-2xl font-black mb-10 text-slate-800 border-r-4 border-green-500 pr-4">شركاء التجهيز المعتمدون</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div class="partner-box h-24 rounded-3xl flex items-center justify-center font-black text-[10px] uppercase">Huawei Solar</div>
+            <div class="partner-box h-24 rounded-3xl flex items-center justify-center font-black text-[10px] uppercase">Jinko Solar</div>
+            <div class="partner-box h-24 rounded-3xl flex items-center justify-center font-black text-[10px] uppercase">SMA Energy</div>
+            <div class="partner-box h-24 rounded-3xl flex items-center justify-center font-black text-[10px] uppercase italic text-green-600">GreenInvest</div>
+            <div class="partner-box h-24 rounded-3xl flex items-center justify-center font-black text-[10px] uppercase">Schneider</div>
+            <div class="partner-box h-24 rounded-3xl border-dashed border-2 flex items-center justify-center text-slate-300 text-[9px]">مساحة شريك جديد</div>
         </div>
     </section>
 
-    <section class="bg-slate-100 py-20 mb-24">
-        <div class="max-w-6xl mx-auto px-6 text-center">
-            <h2 class="text-3xl font-black mb-12" id="testiTitle">آراء مستخدمينا في المغرب</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-[2rem] border border-slate-200 text-right">
-                    <div class="text-yellow-400 flex mb-4"><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i></div>
-                    <p class="text-slate-600 italic mb-4" id="t1">"ساعدتني الحاسبة في اتخاذ قرار التحول للطاقة الشمسية. التوفير حقيقي والنتائج دقيقة جداً."</p>
-                    <h4 class="font-bold text-slate-900">— يوسف، الدار البيضاء</h4>
+    <section class="bg-green-100/50 py-24 mb-24">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-3xl font-black text-center mb-16">قصص نجاح مع BI-SOLAR</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-right">
+                <div class="bg-white p-10 rounded-[3rem] shadow-sm">
+                    <div class="flex text-orange-400 mb-6"><i data-lucide="star" class="fill-current w-4"></i><i data-lucide="star" class="fill-current w-4"></i><i data-lucide="star" class="fill-current w-4"></i><i data-lucide="star" class="fill-current w-4"></i><i data-lucide="star" class="fill-current w-4"></i></div>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-8 italic">"بفضل الحاسبة عرفت شحال خاصني ديال الألواح بالضبط قبل ما يجي عندي التقني. الخدمة احترافية بامتياز."</p>
+                    <h4 class="font-black text-green-700">كريم العلمي - فاس</h4>
                 </div>
-                <div class="bg-white p-8 rounded-[2rem] border border-slate-200 text-right">
-                    <div class="text-yellow-400 flex mb-4"><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i></div>
-                    <p class="text-slate-600 italic mb-4" id="t2">"موقع ممتاز، سهل علي مقارنة الأسعار وفهم متى سأسترد مصاريف التركيب."</p>
-                    <h4 class="font-bold text-slate-900">— فاطمة، مراكش</h4>
+                <div class="bg-white p-10 rounded-[3rem] shadow-sm border-2 border-green-500">
+                    <div class="flex text-orange-400 mb-6"><i data-lucide="star" class="fill-current w-4"></i><i data-lucide="star" class="fill-current w-4"></i><i data-lucide="star" class="fill-current w-4"></i><i data-lucide="star" class="fill-current w-4"></i><i data-lucide="star" class="fill-current w-4"></i></div>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-8 italic">"وفرت 70% من فاتورة الكهرباء ديال المعمل ديالي من بعد ما استعملت دراسة BI-SOLAR."</p>
+                    <h4 class="font-black text-green-700">شركة تيكستيل - طنجة</h4>
                 </div>
-                <div class="bg-white p-8 rounded-[2rem] border border-slate-200 text-right">
-                    <div class="text-yellow-400 flex mb-4"><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i></div>
-                    <p class="text-slate-600 italic mb-4" id="t3">"أنصح كل صاحب منزل باستخدامه قبل تواصله مع أي شركة تركيب."</p>
-                    <h4 class="font-bold text-slate-900">— محمد، طنجة</h4>
+                <div class="bg-white p-10 rounded-[3rem] shadow-sm">
+                    <div class="flex text-orange-400 mb-6"><i data-lucide="star" class="fill-current w-4"></i><i data-lucide="star" class="fill-current w-4"></i><i data-lucide="star" class="fill-current w-4"></i><i data-lucide="star" class="fill-current w-4"></i><i data-lucide="star" class="fill-current w-4"></i></div>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-8 italic">"دقة الحسابات خلاتني نثيق فالمشروع ونركب الطاقة الشمسية فداري فمراكش."</p>
+                    <h4 class="font-black text-green-700">أمين الرافعي - مراكش</h4>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="max-w-4xl mx-auto px-6 mb-24">
-        <div class="bg-slate-900 rounded-[3rem] p-10 md:p-16 text-white text-center shadow-2xl relative overflow-hidden">
-            <h2 class="text-3xl font-black mb-6" id="formTitle">هل أنت جاهز لتغيير حياتك؟</h2>
-            <p class="text-slate-400 mb-10 text-sm" id="formSub">اترك بياناتك وسنقوم بتوجيه طلبك لأفضل مزود خدمة في منطقتك للحصول على عرض سعر مجاني.</p>
+    <section id="solar-form" class="max-w-4xl mx-auto px-6 mb-24">
+        <div class="bg-slate-900 rounded-[3.5rem] p-12 md:p-16 text-center text-white relative">
+            <h2 class="text-3xl font-black mb-6">اطلب دراسة مجانية لموقعك</h2>
+            <p class="text-slate-400 mb-12 text-sm max-w-lg mx-auto leading-relaxed">أرسل بياناتك وسيقوم خبير تقني من فريقنا بالتواصل معك لمعاينة السطح وتقديم عرض سعر دقيق.</p>
             
-            <form action="https://formspree.io/f/xvzwgbag" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6 text-right">
-                <div class="space-y-2 text-right">
-                    <label class="text-[10px] uppercase font-bold text-slate-500 mr-2" id="nameLabel">الاسم بالكامل</label>
-                    <input type="text" name="name" id="nameInp" placeholder="مثال: أحمد علي" required class="w-full p-4 bg-white/5 border border-white/10 rounded-2xl outline-none focus:border-green-500 transition font-bold text-white">
-                </div>
-                <div class="space-y-2 text-right">
-                    <label class="text-[10px] uppercase font-bold text-slate-500 mr-2" id="phoneLabel">رقم الهاتف</label>
-                    <input type="tel" name="phone" id="phoneInp" placeholder="0612345678" required class="w-full p-4 bg-white/5 border border-white/10 rounded-2xl outline-none focus:border-green-500 transition font-bold text-white text-right">
-                </div>
-                <button type="submit" id="submitBtn" class="md:col-span-2 py-5 bg-green-500 hover:bg-green-400 text-slate-900 font-black text-xl rounded-2xl transition-all shadow-xl shadow-green-500/20">احصل على العرض الآن</button>
+            <form action="https://formspree.io/f/xvzwgbag" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <input type="text" name="name" placeholder="الاسم الكامل أو الشركة" required class="p-5 bg-white/5 border border-white/10 rounded-2xl outline-none focus:border-green-500 font-bold text-right transition">
+                <input type="tel" name="phone" placeholder="رقم الهاتف (WhatsApp)" required class="p-5 bg-white/5 border border-white/10 rounded-2xl outline-none focus:border-green-500 font-bold text-right transition">
+                <textarea name="message" placeholder="ملاحظات إضافية (اختياري)" class="md:col-span-2 p-5 bg-white/5 border border-white/10 rounded-2xl outline-none focus:border-green-500 font-bold text-right h-32 transition"></textarea>
+                <button type="submit" class="md:col-span-2 py-5 bg-green-600 text-white font-black text-xl rounded-2xl hover:bg-green-500 transition shadow-xl shadow-green-600/20">إرسال الطلب</button>
             </form>
-            <p class="mt-6 text-[10px] text-slate-500" id="privacyNote">بإرسالك الطلب، أنت توافق على معالجة بياناتك لغرض تقديم الاستشارة الفنية فقط.</p>
         </div>
     </section>
 
-    <section class="max-w-6xl mx-auto px-6 mb-20 text-slate-400 text-xs border-t pt-10 text-center">
-        <h3 class="font-bold mb-4 text-slate-600" id="ppHeader">سياسة الخصوصية / Privacy Policy</h3>
-        <p id="ppContent" class="max-w-3xl mx-auto leading-relaxed">
-            نحن نحترم خصوصيتك. البيانات التي تقدمها (الاسم ورقم الهاتف) تُستخدم حصرياً لمساعدتك في الحصول على عروض أسعار تنافسية من مزودي الطاقة الشمسية المعتمدين في المغرب. لن يتم مشاركة بياناتك مع أي جهات خارجية غير ذات صلة.
+    <section class="max-w-4xl mx-auto px-6 mb-20 text-center border-t border-green-100 pt-10">
+        <h4 class="text-slate-400 font-black mb-4 uppercase text-[10px] tracking-[0.4em]">Privacy Policy & Data Protection</h4>
+        <p class="text-slate-400 text-[10px] leading-relaxed italic max-w-xl mx-auto">
+            بياناتك في أمان مع BI-SOLAR. المعلومات التي تقدمها عبر هذا الموقع تُستخدم حصرياً لإعداد الدراسات التقنية والتواصل التجاري بخصوص أنظمة الطاقة الشمسية. نحن لا نشارك بياناتك مع أي جهات خارجية غير معنية بتنفيذ مشروعك.
         </p>
     </section>
 
-    <footer class="text-center py-12 text-slate-300 text-[10px] font-bold tracking-widest uppercase">
-        &copy; 2026 SolarTek MA | All Rights Reserved
+    <footer class="text-center py-10 text-slate-300 text-[9px] font-black uppercase tracking-[0.5em]">
+        &copy; 2026 BI-SERVICE | BI-SOLAR GREEN DIVISION
     </footer>
+
+    <a href="https://wa.me/212698984642" target="_blank" class="fixed bottom-8 right-8 z-[100] bg-[#25D366] text-white p-5 rounded-full shadow-2xl hover:scale-110 transition-transform shadow-green-200">
+        <i data-lucide="phone" class="w-6 h-6"></i>
+    </a>
 
     <script>
         lucide.createIcons();
-        let chart;
-        let currentLang = 'ar';
 
-        const translations = {
-            ar: {
-                heroTitle: "استثمر في شمس المغرب<br><span class='text-green-600'>ووفر فواتيرك للأبد</span>",
-                heroSub: "احسب أرباحك بالدرهم المغربي واحصل على استشارة تقنية مجانية من خبراء معتمدين.",
-                inputTitle: "معايير الحساب",
-                billLabel: "الفاتورة الشهرية (MAD)",
-                costLabel: "ميزانية النظام (MAD)",
-                annSavingLabel: "التوفير السنوي المتوقع",
-                paybackLabel: "فترة استرداد الاستثمار",
-                partnersTitle: "الشركاء والمزودون المعتمدون",
-                adText: "مساحة إعلانية شاغرة",
-                testiTitle: "آراء مستخدمينا في المغرب",
-                formTitle: "هل أنت جاهز لتغيير حياتك؟",
-                formSub: "اترك بياناتك وسنقوم بتوجيه طلبك لأفضل مزود خدمة في منطقتك للحصول على عرض سعر مجاني.",
-                nameLabel: "الاسم بالكامل",
-                phoneLabel: "رقم الهاتف",
-                submitBtn: "احصل على العرض الآن",
-                langBtn: "English",
-                years: "سنة",
-                chartLabel: "صافي الأرباح (MAD)",
-                ppHeader: "سياسة الخصوصية / Privacy Policy",
-                ppContent: "نحن نحترم خصوصيتك. البيانات التي تقدمها (الاسم ورقم الهاتف) تُستخدم حصرياً لمساعدتك في الحصول على عروض أسعار تنافسية من مزودي الطاقة الشمسية المعتمدين في المغرب. لن يتم مشاركة بياناتك مع أي جهات خارجية غير ذات صلة."
-            },
-            en: {
-                heroTitle: "Invest in Morocco's Sun<br><span class='text-green-600'>Save on Bills Forever</span>",
-                heroSub: "Calculate ROI in MAD and get a free technical consultation from certified experts.",
-                inputTitle: "Calculation Engine",
-                billLabel: "Monthly Bill (MAD)",
-                costLabel: "System Budget (MAD)",
-                annSavingLabel: "Estimated Annual Savings",
-                paybackLabel: "Payback Period",
-                partnersTitle: "Certified Solar Partners",
-                adText: "Available Ad Space",
-                testiTitle: "What our users say",
-                formTitle: "Ready to Change Your Life?",
-                formSub: "Leave your details and we will direct your request to the best provider in your area.",
-                nameLabel: "Full Name",
-                phoneLabel: "Phone Number",
-                submitBtn: "Get Your Quote Now",
-                langBtn: "العربية",
-                years: "Years",
-                chartLabel: "Net Profit (MAD)",
-                ppHeader: "Privacy Policy / سياسة الخصوصية",
-                ppContent: "We respect your privacy. The information you provide (name and phone) is used exclusively to help you get competitive solar quotes from certified providers in Morocco. Your data will not be shared with unrelated third parties."
-            }
-        };
+        function calculateSolar() {
+            const bill = parseFloat(document.getElementById('bill').value) || 0;
+            const area = parseFloat(document.getElementById('area').value) || 0;
+            const type = document.getElementById('type').value;
 
-        function toggleLanguage() {
-            currentLang = currentLang === 'ar' ? 'en' : 'ar';
-            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-            document.body.className = currentLang === 'ar' ? 'bg-slate-50 text-slate-900 text-right' : 'bg-slate-50 text-slate-900 text-left';
-            updateUI();
-            calculate();
+            // Average Moroccan Electricity Price ~1.2 MAD/kWh
+            const monthlykWh = bill / 1.1; 
+            const annualkWh = monthlykWh * 12;
+
+            // Average yield in Morocco ~1600 kWh/kWp
+            const requiredkWp = (monthlykWh / 130); 
+            const panelPower = 450; // 450W panels
+            const numPanels = Math.ceil((requiredkWp * 1000) / panelPower);
+
+            // Cost Estimation
+            let costPerkWp = type === 'on-grid' ? 10000 : 16000;
+            const totalCost = requiredkWp * costPerkWp;
+
+            const annualSavings = bill * 12 * 0.85; // 85% coverage
+            const paybackYears = totalCost / annualSavings;
+            const co2Saved = requiredkWp * 0.7; // 0.7 tons per kWp per year
+
+            document.getElementById('savings').innerText = Math.round(annualSavings).toLocaleString() + " MAD";
+            document.getElementById('cost').innerText = Math.round(totalCost).toLocaleString() + " MAD";
+            document.getElementById('panels').innerText = numPanels + " ألواح";
+            document.getElementById('payback').innerText = paybackYears.toFixed(1) + " سنوات";
+            document.getElementById('co2').innerText = co2Saved.toFixed(1) + " طن/سنة";
         }
 
-        function updateUI() {
-            const t = translations[currentLang];
-            document.getElementById('heroTitle').innerHTML = t.heroTitle;
-            document.getElementById('heroSub').innerText = t.heroSub;
-            document.getElementById('inputTitle').lastChild.textContent = " " + t.inputTitle;
-            document.getElementById('billLabel').innerText = t.billLabel;
-            document.getElementById('costLabel').innerText = t.costLabel;
-            document.getElementById('annSavingLabel').innerText = t.annSavingLabel;
-            document.getElementById('paybackLabel').innerText = t.paybackLabel;
-            document.getElementById('partnersTitle').innerText = t.partnersTitle;
-            document.querySelectorAll('.adText').forEach(el => el.innerText = t.adText);
-            document.getElementById('testiTitle').innerText = t.testiTitle;
-            document.getElementById('formTitle').innerText = t.formTitle;
-            document.getElementById('formSub').innerText = t.formSub;
-            document.getElementById('nameLabel').innerText = t.nameLabel;
-            document.getElementById('phoneLabel').innerText = t.phoneLabel;
-            document.getElementById('submitBtn').innerText = t.submitBtn;
-            document.getElementById('langBtn').innerText = t.langBtn;
-            document.getElementById('ppHeader').innerText = t.ppHeader;
-            document.getElementById('ppContent').innerText = t.ppContent;
-        }
-
-        function calculate() {
-            const bill = parseFloat(document.getElementById('monthlyBill').value) || 0;
-            const cost = parseFloat(document.getElementById('systemCost').value) || 0;
-            const annualSaving = bill * 12 * 0.90; 
-            const payback = cost / annualSaving;
-            const t = translations[currentLang];
-
-            document.getElementById('annualSaving').innerText = `${Math.round(annualSaving).toLocaleString()} MAD`;
-            document.getElementById('paybackText').innerText = isFinite(payback) && payback > 0 ? `${payback.toFixed(1)} ${t.years}` : `---`;
-            updateChart(annualSaving, cost, t.chartLabel);
-        }
-
-        function updateChart(annual, cost, label) {
-            const years = [0, 5, 10, 15, 20, 25];
-            const data = years.map(y => {
-                let cumulative = 0;
-                let currentSaving = annual;
-                for(let i=1; i<=y; i++) {
-                    cumulative += currentSaving;
-                    currentSaving *= 1.04;
-                }
-                return cumulative - cost;
-            });
-
-            if (chart) chart.destroy();
-            const ctx = document.getElementById('mainChart').getContext('2d');
-            chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: years.map(y => (currentLang === 'ar' ? `سنة ` : `Yr `) + y),
-                    datasets: [{
-                        label: label,
-                        data: data,
-                        borderColor: '#10b981',
-                        borderWidth: 4,
-                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                        fill: true,
-                        tension: 0.4,
-                        pointRadius: 0
-                    }]
-                },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
-            });
-        }
-
-        window.onload = () => { updateUI(); calculate(); };
+        window.onload = calculateSolar;
     </script>
 </body>
 </html>
